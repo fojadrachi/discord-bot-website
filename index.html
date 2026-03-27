@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>Discord Bot — fojadrachi.com</title>
+  <meta name="description" content="Füge den Discord Bot von fojadrachi.com deinem Server hinzu." />
+  <style>
+    :root{
+      --bg:#070b14;
+      --bg2:#0b1020;
+      --bg3:#0d1322;
+      --panel:#121a2c;
+      --panel2:#182235;
+      --text:#edf3ff;
+      --muted:#9eacc9;
+      --line:rgba(255,255,255,.08);
+      --line-strong:rgba(255,255,255,.14);
+      --accent:#7aa2ff;
+      --accent2:#ff4fd8;
+      --accent3:#3ee6a8;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font:500 16px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% -10%, rgba(122,162,255,.16), transparent 60%),
+        radial-gradient(700px 450px at 100% 0%, rgba(255,79,216,.10), transparent 58%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 45%, var(--bg3) 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1180px;margin:0 auto;padding:24px 18px 64px}
+    .hero{
+      position:relative;padding:32px;border:1px solid var(--line);border-radius:32px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)), rgba(10,14,24,.88);
+      box-shadow:var(--shadow);overflow:hidden;isolation:isolate;
+    }
+    .hero::before{content:"";position:absolute;right:-120px;bottom:-120px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle, rgba(122,162,255,.16), transparent 65%);pointer-events:none}
+    .hero::after{content:"";position:absolute;left:-80px;top:-80px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, rgba(255,79,216,.10), transparent 68%);pointer-events:none}
+    .topbar,.hero-grid{position:relative;z-index:1}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:34px}
+    .brand{display:flex;gap:16px;align-items:center}
+    .logo{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:26px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 40%), linear-gradient(135deg, var(--accent), var(--accent2));box-shadow:0 14px 35px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.08) inset,0 0 30px rgba(122,162,255,.18)}
+    h1{margin:0;font-size:clamp(24px,4vw,38px);line-height:1.05;letter-spacing:-.03em}
+    .sub{margin-top:8px;color:var(--muted);font-size:15px}
+    .status-pill{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);white-space:nowrap}
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--accent3);box-shadow:0 0 0 4px rgba(62,230,168,.12),0 0 18px rgba(62,230,168,.35)}
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch}
+    .hero-copy h2{margin:0 0 12px;font-size:clamp(32px,5.5vw,58px);line-height:1.02;letter-spacing:-.04em}
+    .hero-copy p{margin:0;color:var(--muted);font-size:17px;max-width:760px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 18px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);transition:.18s ease;box-shadow:0 10px 24px rgba(0,0,0,.22)}
+    .btn:hover{transform:translateY(-1px);border-color:var(--line-strong);background:rgba(255,255,255,.08)}
+    .btn.primary{background:linear-gradient(135deg, rgba(122,162,255,.20), rgba(255,79,216,.16));border-color:rgba(122,162,255,.28)}
+    .side-card{border:1px solid var(--line);border-radius:26px;padding:22px;background:linear-gradient(135deg, rgba(255,255,255,.045), rgba(255,255,255,.02)), linear-gradient(180deg, #162033 0%, #10192b 100%);box-shadow:var(--shadow)}
+    .side-card h3{margin:0 0 10px;font-size:22px}
+    .side-card p{margin:0;color:var(--muted)}
+    .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+    .mini{padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035)}
+    .mini strong{display:block;margin-bottom:6px;font-size:14px}
+    .mini span{color:var(--muted);font-size:13px}
+    .section-title{margin:26px 0 14px;font-size:22px;letter-spacing:-.02em}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .card{padding:20px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg, rgba(255,255,255,.045), rgba(255,255,255,.02)), linear-gradient(180deg, #162033 0%, #10192b 100%);box-shadow:var(--shadow)}
+    .icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);margin-bottom:14px}
+    .card h3{margin:0 0 8px;font-size:20px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .card a{display:inline-flex;margin-top:16px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
+    footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:rgba(158,172,201,.9);font-size:14px}
+    footer a{color:#dce8ff;border-bottom:1px dashed rgba(255,255,255,.18)}
+    @media (max-width:900px){.hero-grid,.grid{grid-template-columns:1fr}.topbar{flex-direction:column;align-items:flex-start}}
+    @media (max-width:620px){.wrap{padding:16px 14px 44px}.hero{padding:20px;border-radius:24px}.logo{width:50px;height:50px;font-size:22px}.actions .btn{width:100%}.mini-grid{grid-template-columns:1fr}.status-pill{white-space:normal}.hero-copy p{font-size:15px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">🤖</div>
+          <div>
+            <h1>Discord Bot</h1>
+            <div class="sub">Bot-Seite für fojadrachi.com mit Invite, TOS und Privacy Policy.</div>
+          </div>
+        </div>
+        <div class="status-pill"><span class="dot" aria-hidden="true"></span><span>Bot-Landingpage: Online</span></div>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h2>Füge den Bot<br>mit einem Klick hinzu.</h2>
+          <p>
+            Nutze den Bot auf deinem Discord-Server und greife direkt auf die wichtigsten Informationen,
+            Nutzungsbedingungen und Datenschutzseiten zu.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1482093262071267328&scope=bot%20applications.commands&permissions=8" target="_blank" rel="noopener">Bot hinzufügen</a>
+            <a class="btn" href="/tos">TOS</a>
+            <a class="btn" href="/privacy">Privacy Policy</a>
+          </div>
+        </div>
+
+        <aside class="side-card">
+          <h3>Direktstart</h3>
+          <p>Trage deine echte Discord OAuth2 Invite-URL in <code>index.html</code> ein und stelle die Seite live.</p>
+          <div class="mini-grid">
+            <div class="mini"><strong>/tos</strong><span>Nutzungsbedingungen</span></div>
+            <div class="mini"><strong>/privacy</strong><span>Datenschutz</span></div>
+            <div class="mini"><strong>HTTPS</strong><span>für Discord empfohlen</span></div>
+            <div class="mini"><strong>Nginx</strong><span>Reverse Proxy auf Port 7781</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <h2 class="section-title">Was enthalten ist</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="icon">➕</div>
+        <h3>Bot Invite</h3>
+        <p>Großer Button zum Hinzufügen des Bots auf deinen Server.</p>
+        <a href="https://discord.com/oauth2/authorize?client_id=DEINE_CLIENT_ID&scope=bot%20applications.commands&permissions=8" target="_blank" rel="noopener">Invite öffnen</a>
+      </article>
+
+      <article class="card">
+        <div class="icon">📜</div>
+        <h3>Terms of Service</h3>
+        <p>Eigene Unterseite für die Nutzungsbedingungen deines Bots.</p>
+        <a href="/tos">/tos öffnen</a>
+      </article>
+
+      <article class="card">
+        <div class="icon">🔒</div>
+        <h3>Privacy Policy</h3>
+        <p>Eigene Unterseite für Datenschutz und Datenverarbeitung.</p>
+        <a href="/privacy">/privacy öffnen</a>
+      </article>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> fojadrachi.com</div>
+      <div>Kontakt: <a href="mailto:admin@fojadrachi.com">admin@fojadrachi.com</a></div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
